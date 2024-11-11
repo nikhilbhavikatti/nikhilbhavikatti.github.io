@@ -9,3 +9,6 @@ group :jekyll_plugins do
 end
 
 gem 'github-pages'
+
+# Add this line to provide timezone data compatibility, especially for Windows
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
