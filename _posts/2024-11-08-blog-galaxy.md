@@ -1,7 +1,10 @@
-# Exploring the Cosmos with AI: How Generative Models Create Realistic Galaxy Images and Improve Machine Learning Robustness
+---
+title: "Exploring the Cosmos with AI: How Generative Models Create Realistic Galaxy Images and Improve Machine Learning Robustness"
+date: 2024-11-12
+permalink: /blog/exploring-the-cosmos-with-ai/
+---
 
-## Introduction
-As I delved into the research on using AI to generate realistic galaxy images, I realized just how impactful these methods can be—not only in creating stunning visualizations but also in enhancing machine learning robustness. This paper explores how various generative models, particularly GANs and VAEs, are used to produce galaxy images that closely resemble real astronomical data. The result? A powerful tool for improving machine learning models used in astronomy, making them more resilient to domain shifts and noise. This blog post will break down the research, explain the models and methods, and explore the implications and limitations of this approach.
+This post summarizes and explores insights from the paper *"Realistic galaxy images and improved robustness in machine learning tasks from generative modelling"* by Benjamin J. Holzschuh et al. As I delved into this research, I realized how impactful these methods can be - not only in creating visually realistic galaxy images but also in enhancing machine learning robustness. This paper examines how various generative models, particularly GANs and VAEs, are used to produce synthetic galaxy images that closely resemble real astronomical data. The result? A powerful tool for improving machine learning models used in astronomy, making them more resilient to domain shifts and noise. In this post, I'll break down the research, explain the models and methods, and discuss the implications and limitations of this approach.
 
 ---
 
