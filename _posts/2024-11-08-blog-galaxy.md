@@ -1,15 +1,15 @@
 ---
 title: "Exploring the Cosmos with AI: How Generative Models Create Realistic Galaxy Images and Improve Machine Learning Robustness"
-date: 2024-11-12
+date: 2025-02-07
 permalink: /blog/exploring-the-cosmos-with-ai/
 ---
 
 <div id="toc-container">
-  <h2>Table of Contents</h2>
+  <h2>Contents</h2>
   <ul id="toc-list"></ul>
 </div>
 
-This post summarizes and explores insights from the paper *"Realistic galaxy images and improved robustness in machine learning tasks from generative modelling"* by Benjamin J. Holzschuh et al. As I delved into this research, I realized how impactful these methods can be - not only in creating visually realistic galaxy images but also in enhancing machine learning robustness. This paper examines how various generative models, particularly GANs and VAEs, are used to produce synthetic galaxy images that closely resemble real astronomical data. The result? A powerful tool for improving machine learning models used in astronomy, making them more resilient to domain shifts and noise. In this post, I'll break down the research, explain the models and methods, and discuss the implications and limitations of this approach.
+This post summarizes and explores insights from the paper <a href="https://arxiv.org/abs/2203.11956" target="_blank" rel="noopener noreferrer">Realistic galaxy images and improved robustness in machine learning tasks from generative modelling</a> by Benjamin J. Holzschuh et al. As I delved into this research, I realized how impactful these methods can be - not only in creating visually realistic galaxy images but also in enhancing machine learning robustness. This paper examines how various generative models, particularly GANs and VAEs, are used to produce synthetic galaxy images that closely resemble real astronomical data. The result? A powerful tool for improving machine learning models used in astronomy, making them more resilient to domain shifts and noise. In this post, I'll break down the research, explain the models and methods, and discuss the implications and limitations of this approach.
 
 ## The Era of Big Data in Astronomy
 Astronomy is undergoing a transformative phase, driven by cutting-edge surveys like Euclid, the Vera Rubin Observatory, and the Square Kilometer Array (SKA). These initiatives promise a deluge of high-quality data, enabling unprecedented studies of cosmic phenomena. For example, the Euclid survey is set to cover a 40-square-degree area of the sky, dwarfing the 2-square-degree COSMOS field while maintaining comparable angular resolution.
@@ -50,17 +50,17 @@ The SKIRT dataset is a collection of synthetic high-resolution galaxy images gen
 <figure>
   <img src="{{ site.baseurl }}/assets/images/01_skirt_or.jpg" alt="Original SKIRT images" width="800" height="100">
   <img src="{{ site.baseurl }}/assets/images/02_skirt_gen.jpg" alt="StyleGAN generated SKIRT images" width="800" height="100">
-  <figcaption>Original (top row) and StyleGAN generated (bottom row) SKIRT synthetic images</figcaption>
+  <figcaption style="text-align: center;">Original (top) and StyleGAN generated (bottom) SKIRT synthetic images</figcaption>
 </figure>
 <figure>
   <img src="{{ site.baseurl }}/assets/images/03_cosmos_or.jpg" alt="Original COSMOS field observations images" width="800" height="100">
   <img src="{{ site.baseurl }}/assets/images/04_cosmos_gen.jpg" alt="StyleGAN generated COSMOS field observations images" width="800" height="100">
-  <figcaption>Original (top row) and StyleGAN generated (bottom row) COSMOS field observations images</figcaption>
+  <figcaption style="text-align: center;">Original (top) and StyleGAN generated (bottom) COSMOS field observations images</figcaption>
 </figure>
 <figure>
   <img src="{{ site.baseurl }}/assets/images/05_sersic_or.jpg" alt="Original Sersic profile images" width="800" height="100">
   <img src="{{ site.baseurl }}/assets/images/06_sersic_gen.jpg" alt="StyleGAN generated Sersic profile images" width="800" height="100">
-  <figcaption>Original (top row) and StyleGAN generated (bottom row) Sersic profile images</figcaption>
+  <figcaption style="text-align: center;">Original (top) and StyleGAN generated (bottom) Sersic profile images</figcaption>
 </figure>
 
 ## Metrics
@@ -112,20 +112,104 @@ This section presents the performance of the generative models—StyleGAN, ALAEs
 ### Morphological Properties
 Performance Table: Wasserstein Distance (Lower is Better)
 
-| **Property**        | **Sérsic Profiles**       |                         |         | **COSMOS Field**         |                         |         | **SKIRT Synthetic Images** |                         |         |
-|----------------------|---------------------------|-------------------------|---------|--------------------------|-------------------------|---------|-----------------------------|-------------------------|---------|
-|                      | **VAE**                  | **StyleGAN**            | **ALAE**| **VAE**                  | **StyleGAN**            | **ALAE**| **VAE**                     | **StyleGAN**            | **ALAE**|
-| **Asymmetry**        | 97.87                    | 57.93                  | 48.94   | 54.78                   | 11.41                  | 33.17   | 95.12                      | 17.09                  | 15.09   |
-| **Smoothness**       | 69.46                    | 4.83                   | 14.47   | 57.61                   | 5.06                   | 29.12   | 115.44                     | 4.85                   | 6.86    |
-| **Concentration**    | 22.15                    | 5.09                   | 5.36    | 46.69                   | 8.31                   | 58.56   | 45.05                      | 3.92                   | 31.12   |
-| **Gini Coefficient** | 21.63                    | 3.05                   | 6.22    | 48.60                   | 3.26                   | 50.63   | 51.15                      | 14.76                  | 36.30   |
-| **Half-Light Radius**| 30.10                    | 8.08                   | 2.64    | 66.63                   | 2.75                   | 48.01   | 41.27                      | 5.87                   | 9.60    |
-| **Average**          | 32.50                    | 11.89                  | 11.07   | 63.97                   | 6.72                   | 42.32   | 61.14                      | 9.04                   | 17.85   |
-
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+  <tr style="background-color: #f4f4f9; text-align: center; font-weight: bold;">
+    <td style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center;"><strong>Property</strong></td>
+    <td colspan="3" style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center;"><strong>Sérsic Profiles</strong></td>
+    <td colspan="3" style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center;"><strong>COSMOS Field</strong></td>
+    <td colspan="3" style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center;"><strong>SKIRT Synthetic Images</strong></td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa;"></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>ALAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>ALAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center;"><strong>ALAE</strong></td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Asymmetry</td>
+    <td style="border: 1px solid #ddd; text-align: center;">97.87</td>
+    <td style="border: 1px solid #ddd; text-align: center;">57.93</td>
+    <td style="border: 1px solid #ddd; text-align: center;">48.94</td>
+    <td style="border: 1px solid #ddd; text-align: center;">54.78</td>
+    <td style="border: 1px solid #ddd; text-align: center;">11.41</td>
+    <td style="border: 1px solid #ddd; text-align: center;">33.17</td>
+    <td style="border: 1px solid #ddd; text-align: center;">95.12</td>
+    <td style="border: 1px solid #ddd; text-align: center;">17.09</td>
+    <td style="border: 1px solid #ddd; text-align: center;">15.09</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Smoothness</td>
+    <td style="border: 1px solid #ddd; text-align: center;">69.46</td>
+    <td style="border: 1px solid #ddd; text-align: center;">4.83</td>
+    <td style="border: 1px solid #ddd; text-align: center;">14.47</td>
+    <td style="border: 1px solid #ddd; text-align: center;">57.61</td>
+    <td style="border: 1px solid #ddd; text-align: center;">5.06</td>
+    <td style="border: 1px solid #ddd; text-align: center;">29.12</td>
+    <td style="border: 1px solid #ddd; text-align: center;">115.44</td>
+    <td style="border: 1px solid #ddd; text-align: center;">4.85</td>
+    <td style="border: 1px solid #ddd; text-align: center;">6.86</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Concentration</td>
+    <td style="border: 1px solid #ddd; text-align: center;">22.15</td>
+    <td style="border: 1px solid #ddd; text-align: center;">5.09</td>
+    <td style="border: 1px solid #ddd; text-align: center;">5.36</td>
+    <td style="border: 1px solid #ddd; text-align: center;">46.69</td>
+    <td style="border: 1px solid #ddd; text-align: center;">8.31</td>
+    <td style="border: 1px solid #ddd; text-align: center;">58.56</td>
+    <td style="border: 1px solid #ddd; text-align: center;">45.05</td>
+    <td style="border: 1px solid #ddd; text-align: center;">3.92</td>
+    <td style="border: 1px solid #ddd; text-align: center;">31.12</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Gini Coefficient</td>
+    <td style="border: 1px solid #ddd; text-align: center;">21.63</td>
+    <td style="border: 1px solid #ddd; text-align: center;">3.05</td>
+    <td style="border: 1px solid #ddd; text-align: center;">6.22</td>
+    <td style="border: 1px solid #ddd; text-align: center;">48.60</td>
+    <td style="border: 1px solid #ddd; text-align: center;">3.26</td>
+    <td style="border: 1px solid #ddd; text-align: center;">50.63</td>
+    <td style="border: 1px solid #ddd; text-align: center;">51.15</td>
+    <td style="border: 1px solid #ddd; text-align: center;">14.76</td>
+    <td style="border: 1px solid #ddd; text-align: center;">36.30</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Half-Light Radius</td>
+    <td style="border: 1px solid #ddd; text-align: center;">30.10</td>
+    <td style="border: 1px solid #ddd; text-align: center;">8.08</td>
+    <td style="border: 1px solid #ddd; text-align: center;">2.64</td>
+    <td style="border: 1px solid #ddd; text-align: center;">66.63</td>
+    <td style="border: 1px solid #ddd; text-align: center;">2.75</td>
+    <td style="border: 1px solid #ddd; text-align: center;">48.01</td>
+    <td style="border: 1px solid #ddd; text-align: center;">41.27</td>
+    <td style="border: 1px solid #ddd; text-align: center;">5.87</td>
+    <td style="border: 1px solid #ddd; text-align: center;">9.60</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; font-weight: bold; text-align: left;">Average</td>
+    <td style="border: 1px solid #ddd; text-align: center;">32.50</td>
+    <td style="border: 1px solid #ddd; text-align: center;">11.89</td>
+    <td style="border: 1px solid #ddd; text-align: center;">11.07</td>
+    <td style="border: 1px solid #ddd; text-align: center;">63.97</td>
+    <td style="border: 1px solid #ddd; text-align: center;">6.72</td>
+    <td style="border: 1px solid #ddd; text-align: center;">42.32</td>
+    <td style="border: 1px solid #ddd; text-align: center;">61.14</td>
+    <td style="border: 1px solid #ddd; text-align: center;">9.04</td>
+    <td style="border: 1px solid #ddd; text-align: center;">17.85</td>
+  </tr>
+</table>
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/07_histograms_morph.png" alt="">
-  <figcaption></figcaption>
+  <figcaption>
+  Histograms showing selected optical morphological measurements for the SKIRT dataset and the generated datasets
+  </figcaption>
 </figure>
 
 #### Observations
@@ -136,15 +220,38 @@ Performance Table: Wasserstein Distance (Lower is Better)
 ### Power Spectrum Analysis
 Performance Table: Average Wasserstein Distance for Power Spectrum (Lower is Better)
 
-| **Dataset**          | **VAE** | **StyleGAN** | **ALAE** |
-|-----------------------|---------|--------------|----------|
-| **Sérsic Profiles**   | 13.94   | 2.50         | 3.95     |
-| **COSMOS Field**      | 24.38   | 5.24         | 8.06     |
-| **SKIRT Images**      | 27.61   | 4.83         | 14.00    |
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+  <tr style="background-color: #f4f4f9; text-align: center; font-weight: bold;">
+    <td style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center; width: 25%;"><strong>Dataset</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>ALAE</strong></td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">Sérsic Profiles</td>
+    <td style="border: 1px solid #ddd; text-align: center;">13.94</td>
+    <td style="border: 1px solid #ddd; text-align: center;">2.50</td>
+    <td style="border: 1px solid #ddd; text-align: center;">3.95</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">COSMOS Field</td>
+    <td style="border: 1px solid #ddd; text-align: center;">24.38</td>
+    <td style="border: 1px solid #ddd; text-align: center;">5.24</td>
+    <td style="border: 1px solid #ddd; text-align: center;">8.06</td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">SKIRT Images</td>
+    <td style="border: 1px solid #ddd; text-align: center;">27.61</td>
+    <td style="border: 1px solid #ddd; text-align: center;">4.83</td>
+    <td style="border: 1px solid #ddd; text-align: center;">14.00</td>
+  </tr>
+</table>
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/08_contour_2dpower_spectrum.png" alt="">
-  <figcaption></figcaption>
+  <figcaption>
+  Contour plots of the average shifted 2D power spectrum of the \( r \)-band of the raw network outputs (VAE (i), ALAE (ii), and StyleGAN  (iii)) and the resized \( 256 \times 256 \) images of the SKIRT dataset (iv)
+  </figcaption>
 </figure>
 
 #### Observations
@@ -155,15 +262,38 @@ Performance Table: Average Wasserstein Distance for Power Spectrum (Lower is Bet
 ### Colors and Bulge Statistics
 Performance Table: Wasserstein Distance for Colors and Bulge Statistics (Lower is Better)
 
-| **Metric**             | **VAE** | **StyleGAN** | **ALAE** |
-|-------------------------|---------|--------------|----------|
-| **(g-i) Early Types**   | 12.60   | 1.15         | 3.16     |
-| **(g-i) Late Types**    | 12.23   | 1.39         | 2.15     |
-| **Gini-M20 Statistic**  | 16.89   | 1.63         | 11.89    |
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+  <tr style="background-color: #f4f4f9; text-align: center; font-weight: bold;">
+    <td style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center; width: 25%;"><strong>Metric</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>ALAE</strong></td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">(g-i) Early Types</td>
+    <td style="border: 1px solid #ddd; text-align: center;">12.60</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1.15</td>
+    <td style="border: 1px solid #ddd; text-align: center;">3.16</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">(g-i) Late Types</td>
+    <td style="border: 1px solid #ddd; text-align: center;">12.23</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1.39</td>
+    <td style="border: 1px solid #ddd; text-align: center;">2.15</td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">Gini-M20 Statistic</td>
+    <td style="border: 1px solid #ddd; text-align: center;">16.89</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1.63</td>
+    <td style="border: 1px solid #ddd; text-align: center;">11.89</td>
+  </tr>
+</table>
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/09_dist_bulge_colour.png" alt="">
-  <figcaption></figcaption>
+  <figcaption>
+  The Gini-M20 bulge statistic \( F(G, M_{20}) \) vs \( (g - i)_{\text{SDSS}} \) color of the generated data and the SKIRT galaxies. The bottom panels show contour plots of the galaxy distribution, while the histograms in the top panels show the marginal distribution of late- and early-type galaxies. A galaxy is classified as early-type if \( F(G, M_{20}) \geq 0 \) and late-type otherwise.
+  </figcaption>
 </figure>
 
 #### Observations
@@ -174,14 +304,53 @@ Performance Table: Wasserstein Distance for Colors and Bulge Statistics (Lower i
 ### Computer Vision Metrics
 Performance Table: FID and KID (Lower is Better)
 
-| **Metric** | **Dataset**         | **VAE** | **StyleGAN** | **ALAE** |
-|------------|---------------------|---------|--------------|----------|
-| **FID**    | Sérsic Profiles     | 1088    | 55           | 161      |
-|            | COSMOS Field        | 18425   | 145          | 1465     |
-|            | SKIRT Images        | 11737   | 776          | 921      |
-| **KID**    | Sérsic Profiles     | 0.81    | 0.04         | 0.08     |
-|            | COSMOS Field        | 22.28   | 0.08         | 1.19     |
-|            | SKIRT Images        | 12.78   | 0.60         | 0.52     |
+<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+  <tr style="background-color: #f4f4f9; text-align: center; font-weight: bold;">
+    <td style="border: 1px solid #ddd; background-color: #f4f4f9; text-align: center;"><strong>Metric</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>Dataset</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>VAE</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>StyleGAN</strong></td>
+    <td style="border: 1px solid #ddd; text-align: center; width: 25%;"><strong>ALAE</strong></td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td rowspan="3" style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">FID</td>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">Sérsic Profiles</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1088</td>
+    <td style="border: 1px solid #ddd; text-align: center;">55</td>
+    <td style="border: 1px solid #ddd; text-align: center;">161</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">COSMOS Field</td>
+    <td style="border: 1px solid #ddd; text-align: center;">18425</td>
+    <td style="border: 1px solid #ddd; text-align: center;">145</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1465</td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">SKIRT Images</td>
+    <td style="border: 1px solid #ddd; text-align: center;">11737</td>
+    <td style="border: 1px solid #ddd; text-align: center;">776</td>
+    <td style="border: 1px solid #ddd; text-align: center;">921</td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td rowspan="3" style="border: 1px solid #ddd; background-color: #fafafa; text-align: left; font-weight: bold;">KID</td>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">Sérsic Profiles</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.81</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.04</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.08</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">COSMOS Field</td>
+    <td style="border: 1px solid #ddd; text-align: center;">22.28</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.08</td>
+    <td style="border: 1px solid #ddd; text-align: center;">1.19</td>
+  </tr>
+  <tr style="background-color: #fafafa;">
+    <td style="border: 1px solid #ddd; background-color: #fafafa; text-align: left;">SKIRT Images</td>
+    <td style="border: 1px solid #ddd; text-align: center;">12.78</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.60</td>
+    <td style="border: 1px solid #ddd; text-align: center;">0.52</td>
+  </tr>
+</table>
 
 #### Observations
 * StyleGAN achieved the lowest FID and KID scores across all datasets, confirming its ability to produce perceptually realistic and diverse images.
@@ -206,36 +375,42 @@ To improve robustness in these models, one approach suggested by the authors is 
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/10_experiment_setup.png" alt="">
-  <figcaption></figcaption>
+  <figcaption>
+  Experiment setup for evaluating the influence of mixing source and generated data on the denoising model. The real data is split into a testing set, validation set, and generated set. The generative models are trained on the training and validation sets. When training the denoising models, we randomly draw a sample from the training set with probability \(1 - \alpha\) and from the generated set with probability \(\alpha\). The best denoising model is selected based on its performance on the validation set. The model is then evaluated on the testing set with multiple augmentations to simulate a domain shift.
+</figcaption>
+
+
 </figure>
 
 To test this approach, the authors conducted an experiment focused on image denoising, where the goal was to train a Convolutional Neural Network (CNN) to recover clean galaxy images from noisy, blurred inputs.
 
-- #### Data Preparation:
-  - Original data: Real, high-resolution, and noiseless galaxy images sourced from the SKIRT dataset.
-  - Generated data: Synthetic galaxy images created using StyleGAN, trained on the same SKIRT dataset.
-  - Mock observations: Both real and generated images were degraded by adding the following distortions:
-    - A Gaussian PSF with a standard deviation of 2.0 pixels, which simulates the blurring effect of telescope optics.
-    - Gaussian noise with σ = 4.0 e⁻/pixel, mimicking real-world observational distortions.
+#### Data Preparation:
+- Original data: Real, high-resolution, and noiseless galaxy images sourced from the SKIRT dataset.
+- Generated data: Synthetic galaxy images created using StyleGAN, trained on the same SKIRT dataset.
+- Mock observations: Both real and generated images were degraded by adding the following distortions:
+  - A Gaussian PSF with a standard deviation of 2.0 pixels, which simulates the blurring effect of telescope optics.
+  - Gaussian noise with σ = 4.0 e⁻/pixel, mimicking real-world observational distortions.
 
-- #### Training Strategy:
-  The authors used a mixing factor (α) to control the proportion of real and generated data in the training set:
-  - α = 0: Only real data was used.
-  - α = 0.5: A 50-50 mix of real and generated data.
-  - α = 1: Only generated data was used.
+#### Training Strategy:
+The authors used a mixing factor (α) to control the proportion of real and generated data in the training set:
+- α = 0: Only real data was used.
+- α = 0.5: A 50-50 mix of real and generated data.
+- α = 1: Only generated data was used.
 
 The total dataset size was kept constant to ensure that any improvements in performance were due to data diversity, rather than having more training samples.
 
-- #### Evaluation:
+#### Evaluation:
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/11_experiment_result.png" alt="">
-  <figcaption></figcaption>
+  <figcaption>
+  Mean squared error of the final models trained with different mixing factors \(\alpha\) on the testing set and on the testing set with various augmentations.
+  </figcaption>
 </figure>
 
-  The model's performance was evaluated based on the following metrics:
-  - Mean Squared Error (MSE): This metric measured the difference between the denoised output of the model and the original clean image.
-  - Robustness to domain shifts: The CNN was also tested on images with different resolutions and noise levels to assess its ability to generalize under varying conditions.
+The model's performance was evaluated based on the following metrics:
+- Mean Squared Error (MSE): This metric measured the difference between the denoised output of the model and the original clean image.
+- Robustness to domain shifts: The CNN was also tested on images with different resolutions and noise levels to assess its ability to generalize under varying conditions.
 
 ### Key Results
 
