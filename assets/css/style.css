@@ -1,18 +1,8 @@
 figure {
     text-align: center;  /* Centers the figure container */
   }
-  
-/*figcaption {
-    display: block;
-    text-align: center;
-    font-style: italic;
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px;
-    width: 100%;
-  }*/
 
-  figcaption {
+figcaption {
     display: block;
     font-size: 16px; /* Slightly larger for readability */
     font-style: normal; /* Remove italics for better clarity */
@@ -22,7 +12,7 @@ figure {
     text-align: justify;
     margin: 0 auto; /* Center the caption */
     line-height: 1.5; /* Improve readability */
-}
+  }
 
 a {
     color: #0077cc; /* Default link color */
@@ -38,52 +28,44 @@ a, a:link, a:visited {
   }
 
   /* Adjusting heading sizes for better visual hierarchy*/
-  h1 {
+h1 {
     font-size: 35px;
     font-weight: bold;
   }
   
-  h2 {
+h2 {
     font-size: 30px;
     font-weight: bold;
   }
   
-  h3 {
+h3 {
     font-size: 25px;
     font-weight: bold;
   }
   
-  h4 {
+h4 {
     font-size: 20px;
     font-weight: bold;
   }
 
-  body {
+body {
     font-size: 18px;  /* Set comfortable reading size */
     line-height: 1.6; /* Improve readability with proper spacing */
-    /*font-family: 'Open Sans', sans-serif;  /* Choose a clean font */
-  }
-  
-  p {
-    margin-bottom: 1.2em;  /* Add space between paragraphs */
-  }
-
-  body {
     color: #333;  /* Dark text for readability */
     background-color: #f9f9f9;  /* Light background to reduce strain */
   }
+  
+p {
+    margin-bottom: 1.2em;  /* Add space between paragraphs */
+  }
 
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     h1 { font-size: 28px; }  
     h2 { font-size: 24px; }  
     h3 { font-size: 20px; }  
     h4 { font-size: 18px; }  
     body { font-size: 16px; } 
   }
-  
-  
-  
-  
 
 /* TOC Styling */
 #toc-container {

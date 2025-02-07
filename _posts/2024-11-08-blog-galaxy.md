@@ -5,11 +5,11 @@ permalink: /blog/exploring-the-cosmos-with-ai/
 ---
 
 <div id="toc-container">
-  <h2>Contents</h2>
+  <h2>CONTENTS</h2>
   <ul id="toc-list"></ul>
 </div>
 
-This post summarizes and explores insights from the paper <a href="https://arxiv.org/abs/2203.11956" target="_blank" rel="noopener noreferrer">Realistic galaxy images and improved robustness in machine learning tasks from generative modelling</a> by Benjamin J. Holzschuh et al. As I delved into this research, I realized how impactful these methods can be - not only in creating visually realistic galaxy images but also in enhancing machine learning robustness. This paper examines how various generative models, particularly GANs and VAEs, are used to produce synthetic galaxy images that closely resemble real astronomical data. The result? A powerful tool for improving machine learning models used in astronomy, making them more resilient to domain shifts and noise. In this post, I'll break down the research, explain the models and methods, and discuss the implications and limitations of this approach.
+Welcome to my blog post summarizing and analyzing the paper <a href="https://arxiv.org/abs/2203.11956" target="_blank" rel="noopener noreferrer">Realistic galaxy images and improved robustness in machine learning tasks from generative modelling</a> by Benjamin J. Holzschuh et al. This research explores the application of generative models, particularly GANs and VAEs, to synthesize high-fidelity galaxy images that closely resemble real astronomical data. Beyond generating realistic images, these methods enhance the robustness of machine learning models in astronomy by mitigating domain shifts and noise. In this post, I will break down the key methodologies, discuss their implications for astrophysical research, and examine the broader impact on machine learning in scientific applications
 
 ## The Era of Big Data in Astronomy
 Astronomy is undergoing a transformative phase, driven by cutting-edge surveys like Euclid, the Vera Rubin Observatory, and the Square Kilometer Array (SKA). These initiatives promise a deluge of high-quality data, enabling unprecedented studies of cosmic phenomena. For example, the Euclid survey is set to cover a 40-square-degree area of the sky, dwarfing the 2-square-degree COSMOS field while maintaining comparable angular resolution.
@@ -89,10 +89,9 @@ The 2D power spectrum is a powerful tool for analyzing the distribution of surfa
 #### Colors and Bulge Statistics
 - Colors: For datasets with multi-band filters, such as SKIRT, the g-i color index measures the difference in brightness between the g and i bands, providing insights into a galaxy’s stellar populations and dust content. Red galaxies, typically early-type, exhibit higher g-i values due to older stars and less active star formation, while blue galaxies, often late-type, have lower g-i values, indicating younger stellar populations and active star formation.
 
-- Bulge Statistics (Gini-M20): The Gini-M20 statistic combines two measures—the Gini coefficient and the M20 statistic—to evaluate the prominence of a galaxy’s central bulge. The Gini coefficient quantifies how concentrated the brightness is, while the M20 statistic describes the spatial distribution of the brightest regions. Together, these metrics help distinguish between early-type galaxies with prominent bulges and late-type galaxies without them.
+- Bulge Statistics (Gini-M20): The Gini-M20 statistic combines two measures - the Gini coefficient and the M20 statistic - to evaluate the prominence of a galaxy’s central bulge. The Gini coefficient quantifies how concentrated the brightness is, while the M20 statistic describes the spatial distribution of the brightest regions. Together, these metrics help distinguish between early-type galaxies with prominent bulges and late-type galaxies without them.
 
 By comparing the g-i colors and bulge statistics of real and generated images, researchers can assess how well generative models capture the diversity of galaxy types, from elliptical galaxies with dominant bulges to disk-like galaxies with more diffuse structures. This analysis ensures that the generated data not only looks realistic but also accurately represents the physical and structural properties of galaxies.
-
 
 #### Wasserstein Distance
 The Wasserstein distance, or Earth Mover's Distance, measures the similarity between two distributions, capturing nuanced differences beyond simple averages. It compares distributions of morphological properties, power spectrum values, and color and bulge statistics, making it ideal for evaluating complex datasets like galaxies. This ensures generative models produce realistic outputs that accurately replicate the statistical and physical properties of real galaxies.
@@ -107,7 +106,7 @@ The Fréchet Inception Distance (FID) is a widely used metric for evaluating the
 KID is a metric similar to FID but employs a kernel-based approach, making it more reliable for small datasets. Like FID, it compares feature representations of real and generated images extracted using a pre-trained network (e.g., InceptionV3), with lower KID values indicating higher similarity. Unlike FID, KID does not assume the data follows a Gaussian distribution and uses an unbiased estimator, which enhances its robustness and accuracy, particularly when working with limited data. These advantages make KID a valuable alternative for evaluating generative models, especially in scenarios where dataset size or distribution assumptions might limit the effectiveness of other metrics.
 
 ## Results
-This section presents the performance of the generative models—StyleGAN, ALAEs, and VAEs—across the datasets (Sérsic profiles, COSMOS, and SKIRT) and metrics. Quantitative results are supported by tables, followed by a detailed description.
+This section presents the performance of the generative models - StyleGAN, ALAEs, and VAEs - across the datasets (Sérsic profiles, COSMOS, and SKIRT) and metrics. Quantitative results are supported by tables, followed by a detailed description.
 
 ### Morphological Properties
 Performance Table: Wasserstein Distance (Lower is Better)
@@ -360,7 +359,6 @@ Performance Table: FID and KID (Lower is Better)
 ## Denoising as a Case Study
 
 ### The Problem: Robustness in Machine Learning
-
 Astronomical images are often subjected to real-world distortions, which make it challenging for machine learning models to perform effectively when applied to these images. Two key factors that contribute to this issue are:
 
 - The Point Spread Function (PSF): The PSF results from the limitations of telescope optics and causes blurring in the images. This effect can severely distort fine details and make it difficult for models to distinguish between important features.
@@ -373,25 +371,23 @@ To improve robustness in these models, one approach suggested by the authors is 
 
 ### Experimental Setup
 
+To test this approach, the authors conducted an experiment focused on image denoising, where the goal was to train a Convolutional Neural Network (CNN) to recover clean galaxy images from noisy, blurred inputs.
+
 <figure>
   <img src="{{ site.baseurl }}/assets/images/10_experiment_setup.png" alt="">
   <figcaption>
   Experiment setup for evaluating the influence of mixing source and generated data on the denoising model. The real data is split into a testing set, validation set, and generated set. The generative models are trained on the training and validation sets. When training the denoising models, we randomly draw a sample from the training set with probability \(1 - \alpha\) and from the generated set with probability \(\alpha\). The best denoising model is selected based on its performance on the validation set. The model is then evaluated on the testing set with multiple augmentations to simulate a domain shift.
 </figcaption>
-
-
 </figure>
 
-To test this approach, the authors conducted an experiment focused on image denoising, where the goal was to train a Convolutional Neural Network (CNN) to recover clean galaxy images from noisy, blurred inputs.
-
-#### Data Preparation:
+#### Data Preparation
 - Original data: Real, high-resolution, and noiseless galaxy images sourced from the SKIRT dataset.
 - Generated data: Synthetic galaxy images created using StyleGAN, trained on the same SKIRT dataset.
 - Mock observations: Both real and generated images were degraded by adding the following distortions:
   - A Gaussian PSF with a standard deviation of 2.0 pixels, which simulates the blurring effect of telescope optics.
   - Gaussian noise with σ = 4.0 e⁻/pixel, mimicking real-world observational distortions.
 
-#### Training Strategy:
+#### Training Strategy
 The authors used a mixing factor (α) to control the proportion of real and generated data in the training set:
 - α = 0: Only real data was used.
 - α = 0.5: A 50-50 mix of real and generated data.
@@ -399,7 +395,7 @@ The authors used a mixing factor (α) to control the proportion of real and gene
 
 The total dataset size was kept constant to ensure that any improvements in performance were due to data diversity, rather than having more training samples.
 
-#### Evaluation:
+#### Evaluation
 
 <figure>
   <img src="{{ site.baseurl }}/assets/images/11_experiment_result.png" alt="">
